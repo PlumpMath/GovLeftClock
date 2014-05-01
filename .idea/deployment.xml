@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="wepapp from local">
+        <serverdata>
+          <mappings>
+            <mapping deploy="GovLeftClock" local="$PROJECT_DIR$" web="/GovLeftClock" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
+

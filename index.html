@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>현정부 교체 타이머</title>
+</head>
+<body>
+  <a id="govLeftClock" href="http://175.125.183.116/"></a><br>
+  idea by 김태현.
+  <script type="text/javascript">
+    function GovLeftClock(interval_){
+      this.interval=interval_;
+      var now = new Date();
+      var govs = [
+        ['이명박', new Date(2008, 1, 25)],
+        ['박근혜', new Date(2013, 1, 25)],
+      ];
+      for (var i in govs) {
+        var start = govs[i][1].getTime(),
+            thisNow = now.getTime(),
+            end = govs[i][1].setFullYear(govs[i][1].getFullYear() + 5);
+        if (start <= thisNow && thisNow <= end) {
+          this.gov=[govs[i][0], new Date(end)];
+          break;
+        }
+      }
+      if(!this.gov){
+        this.gov=['입력안된',govs[i][1]];
+        while(this.gov[1].getTime()<now.getTime() || now.getTime()> this.gov[1].setFullYear(this.gov[1].getFullYear())) this.gov[1]=new Date(this.gov[1].setFullYear(this.gov[1].getFullYear()+5));
+      }
+      this.getDaysInThisMonth= function (now) {
+        var month = now.getMonth();
+        if (month < 12) now = new Date(now.setMonth(month + 1));
+        else {
+          now = new Date(now.setYear(now.getYear() + 1));
+          now = new Date(now.setMonth(0));
+        }
+        now = new Date(now.setDate(0));
+        return now;
+      };
+    }
+    GovLeftClock.prototype.start = function(){
+      this.stop();
+      this.clk = setInterval(this.clock.bind(this), this.interval);
+      return this;
+    };
+    GovLeftClock.prototype.stop = function() {
+      if (this.clk) clearInterval(this.clk);
+      return this;
+    }
+    GovLeftClock.prototype.clock = function () {
+      var now=new Date();
+      var clk = document.getElementById('govLeftClock');
+      var end = this.gov[1];
+      var mssLeft = end.getTime() % 1000 - now.getTime() % 1000,
+          secsLeft = end.getSeconds() - now.getSeconds() - (mssLeft < 0 ? 1 : 0),
+          minsLeft = end.getMinutes() - now.getMinutes() - (secsLeft < 0 ? 1 : 0),
+          hoursLeft = end.getHours() - now.getHours() - (minsLeft < 0 ? 1 : 0),
+          daysLeft = end.getDate() - now.getDate() - (hoursLeft < 0 ? 1 : 0),
+          monsLeft = end.getMonth() - now.getMonth() - (daysLeft < 0 ? 1 : 0),
+          yearsLeft = end.getFullYear() - now.getFullYear() - (monsLeft < 0 ? 1 : 0);
+      var dateArr = [mssLeft, secsLeft, minsLeft, hoursLeft, daysLeft, monsLeft, yearsLeft],
+          lens = [1000, 60, 60, 24, this.getDaysInThisMonth(now), 12],
+          names = ["밀리초", "초", "분", "시간", "일", "개월", "년"];
+      for (var i in lens)
+        if (dateArr[i] < 0) dateArr[i] += lens[i];
+      var msg = '';
+      for (var i in names)
+        msg = dateArr[i] + names[i] + ' ' + msg; //
+      return clk.innerText = this.gov[0]+' 정부의 교체까지 - '+msg;
+    };
+    var govLeftClock=new GovLeftClock(1000).start();
+  </script>
+</body>
+</html>
