@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head lang="ko-kr">
   <meta charset="UTF-8">
   <title>현정부 교체 타이머</title>
+  <link rel="stylesheet" href="css/foundation.css" />
+  <script src="js/vendor/modernizr.js"></script>
 </head>
 <body>
-  우리나라 : <a id="govLeftClock"></a><br>
-  미국 : <a id="govLeftClock-USA"></a><br>
-  중국 : <a id="govLeftClock-China"></a><br>
-  필리핀 : <a id="govLeftClock-Philippines"></a><br>
-  멕시코 : <a id="govLeftClock-Mexico"></a><br>
+  <table>
+    <thead>
+      <tr>
+        <th>국가</th>
+        <th>임기</th>
+        <th>링크</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">우리나라</a></td>
+        <td><span id="govLeftClock"></td>
+      </tr>
+      <tr>
+        <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">미국</a></td>
+        <td><span id="govLeftClock-USA"></td>
+      </tr>
+      <tr>
+        <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">중국</a></td>
+        <td><span id="govLeftClock-China"></td>
+      </tr>
+      <tr>
+        <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">필리핀</a></td>
+        <td><span id="govLeftClock-Philippines"></td>
+      </tr>
+      <tr>
+        <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">멕시코</a></td>
+        <td><span id="govLeftClock-Mexico"></td>
+      </tr>
+    </tbody>
+  </table>
   idea by 김태현.
   <script type="text/javascript">
     function GovLeftClock(dom_,government,duration_){
@@ -78,7 +106,7 @@
     new GovLeftClock(document.getElementById('govLeftClock-USA'),[['Obama',new Date(2009,0,20)],['Obama',new Date(2013,0,20)]],4).start();
     new GovLeftClock(document.getElementById('govLeftClock-China'),[['Hu Jintao',new Date(2003,2,15)],['Hu Jintao',new Date(2008,2,14)],['Xi Jinping',new Date(2013,2,14)]],5).start();
     new GovLeftClock(document.getElementById('govLeftClock-Philippines'),[['Benigno Aquino III',new Date(2010,5,30,12)]],6).start();
-    new GovLeftClock(document.getElementById('govLeftClock-Mexico'),[['Felipe Calderón',new Date(2006,11,1)],['Enrique Peña Nieto',new Date(2012,11,1)]],6).start();
+    new GovLeftClock(document.getElementById('govLeftClock-Mexico'),[['Felipe Calderon',new Date(2006,11,1)],['Enrique Pena Nieto',new Date(2012,11,1)]],6).start();
   </script>
   <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
