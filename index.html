@@ -3,44 +3,53 @@
 <head lang="ko-kr">
   <meta charset="UTF-8">
   <title>현정부 교체 타이머</title>
-  <link rel="stylesheet" href="css/foundation.css" />
+  <link rel="stylesheet" href="css/foundation.min.css" />
+  <!--<link rel="stylesheet" href="css/normalize.css" />
   <script src="js/vendor/modernizr.js"></script>
+  <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>-->
 </head>
 <body>
-  <table>
+  <table width="100%" class="text-center">
     <thead>
       <tr>
         <th>국가</th>
+        <th>정부</th>
         <th>임기</th>
-        <th>링크</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">우리나라</a></td>
+        <td><span id="government"></td>
         <td><span id="govLeftClock"></td>
       </tr>
       <tr>
         <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">미국</a></td>
+        <td><span id="government-USA"></td>
         <td><span id="govLeftClock-USA"></td>
       </tr>
       <tr>
         <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">중국</a></td>
+        <td><span id="government-China"></td>
         <td><span id="govLeftClock-China"></td>
       </tr>
       <tr>
         <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">필리핀</a></td>
+        <td><span id="government-Philippines"></td>
         <td><span id="govLeftClock-Philippines"></td>
       </tr>
       <tr>
         <td><a href="https://en.wikipedia.org/wiki/Government_of_South_Korea">멕시코</a></td>
+        <td><span id="government-Mexico"></td>
         <td><span id="govLeftClock-Mexico"></td>
       </tr>
     </tbody>
   </table>
   idea by 김태현.
   <script type="text/javascript">
-    function GovLeftClock(dom_,government,duration_){
+    function GovLeftClock(name_,dom_,government,duration_){
+      this.name=name_?name_:document.getElementById('government');
       this.dom=dom_?dom_:document.getElementById('govLeftClock');
       this.duration=duration_?duration_:5;
       this.interval=1000;
@@ -100,13 +109,14 @@
       var msg = '';
       for (var i in names)
         msg = dateArr[i] + names[i] + ' ' + msg; //
-      return this.dom.innerText = this.gov[0]+' 정부의 교체까지 - '+msg;
+      this.name.innerText = this.gov[0];
+      return this.dom.innerText = msg;
     };
-    new GovLeftClock(document.getElementById('govLeftClock')).start();
-    new GovLeftClock(document.getElementById('govLeftClock-USA'),[['Obama',new Date(2009,0,20)],['Obama',new Date(2013,0,20)]],4).start();
-    new GovLeftClock(document.getElementById('govLeftClock-China'),[['Hu Jintao',new Date(2003,2,15)],['Hu Jintao',new Date(2008,2,14)],['Xi Jinping',new Date(2013,2,14)]],5).start();
-    new GovLeftClock(document.getElementById('govLeftClock-Philippines'),[['Benigno Aquino III',new Date(2010,5,30,12)]],6).start();
-    new GovLeftClock(document.getElementById('govLeftClock-Mexico'),[['Felipe Calderon',new Date(2006,11,1)],['Enrique Pena Nieto',new Date(2012,11,1)]],6).start();
+    new GovLeftClock().start();
+    new GovLeftClock(document.getElementById('government-USA'), document.getElementById('govLeftClock-USA'),[['Obama',new Date(2009,0,20)],['Obama',new Date(2013,0,20)]],4).start();
+    new GovLeftClock(document.getElementById('government-China'), document.getElementById('govLeftClock-China'),[['Hu Jintao',new Date(2003,2,15)],['Hu Jintao',new Date(2008,2,14)],['Xi Jinping',new Date(2013,2,14)]],5).start();
+    new GovLeftClock(document.getElementById('government-Philippines'), document.getElementById('govLeftClock-Philippines'),[['Benigno Aquino III',new Date(2010,5,30,12)]],6).start();
+    new GovLeftClock(document.getElementById('government-Mexico'), document.getElementById('govLeftClock-Mexico'),[['Felipe Calderon',new Date(2006,11,1)],['Enrique Pena Nieto',new Date(2012,11,1)]],6).start();
   </script>
   <script type="text/javascript">
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
